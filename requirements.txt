@@ -7,6 +7,7 @@ python-dotenv
 pinecone
 
 langchain
+langchain-community
 
 sentence-transformers
 torch

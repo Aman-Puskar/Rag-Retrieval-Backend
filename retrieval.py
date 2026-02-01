@@ -1,9 +1,8 @@
 import os
 from pinecone import Pinecone
-# from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.embeddings import HuggingFaceEmbeddings
-# from speech_input import get_user_query
-# from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 # import google.generativeai as genai
