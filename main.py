@@ -3,7 +3,9 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
+origins = [
+    "https://mypolicyassis.vercel.app",  # your frontend URL
+]
 # CORS (adjust later for production domain)
 app.add_middleware(
     CORSMiddleware,
