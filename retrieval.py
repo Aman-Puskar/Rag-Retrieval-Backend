@@ -10,15 +10,26 @@ INDEX_NAME = "rag-index"
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 index = pc.Index(INDEX_NAME)
 
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
+# embedding_model = HuggingFaceEmbeddings(
+#     model_name="sentence-transformers/all-MiniLM-L6-v2"
+# )
 
+
+
+embedding_model = None
+
+def get_embedding_model():
+    global embedding_model
+    if embedding_model is None:
+        embedding_model = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        )
+    return embedding_model
 # client = OpenAI(api_key=OPENAI_API_KEY)
 
-
 def embed_query(query: str):
-    return embedding_model.embed_query(query)
+    model = get_embedding_model()
+    return model.embed_query(query)
 
 
 def retreive_context(query:str, top_k = 10):
