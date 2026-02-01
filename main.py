@@ -1,30 +1,30 @@
-# main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-# Import your RAG pipeline function
-from retrieval import rag_pipeline  # make sure this is your function in retrieval.py
-
 app = FastAPI()
 
-# Allow your React frontend to access this backend
-origins = ["http://localhost:5173"]  # Vite dev server
-
+# CORS (adjust later for production domain)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Health check 
+@app.get("/")
+def health():
+    return {"status": "ok"}
+
 # Request body schema
 class QueryRequest(BaseModel):
     question: str
 
-# POST endpoint to get RAG response
+# Chat endpoint (lazy RAG load)
 @app.post("/chat")
 async def chat(request: QueryRequest):
+    from retrieval import rag_pipeline 
     answer = rag_pipeline(request.question)
     return {"answer": answer}
