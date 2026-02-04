@@ -94,7 +94,7 @@ def generate_answer(query: str, context: str):
     # response = model.generate_content(prompt)
 
     response = client.models.generate_content(
-       model="gemini-2.5-flash-lite",
+       model="gemini-flash-latest",
         contents=prompt
     )
     answer = response.text
